@@ -1,6 +1,6 @@
 # Go Language Fundamentals
 
-![Go Logo](https://golang.org/lib/godoc/images/go-logo-blue.svg)
+![Go Logo](https://vectorseek.com/wp-content/uploads/2023/03/Golang-Gopher-Logo-Vector.jpg)
 
 Welcome to the Go Language Fundamentals repository. This repository is designed to provide a comprehensive overview of the Go programming language, covering essential topics and best practices.
 
