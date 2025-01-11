@@ -9,6 +9,9 @@ import (
 func main(){
 	r := gin.Default()
 
+	//rendering html files
+	r.LoadHTMLGlob("templates/*")
+
 	// making a realestate landing page apis
 	homeData :=[]gin.H{
 		 {
@@ -32,6 +35,19 @@ func main(){
 		userID := c.Param("id")
 		res := gin.H{
 			"userid" : userID,
+		}
+		c.JSON(http.StatusOK , res)
+	})
+
+	r.GET("/enter-details" , func(c *gin.Context){
+		c.HTML(http.StatusOK , "form.html" , nil)
+	})
+
+	r.POST("/submit" , func(c *gin.Context){
+		res := gin.H{
+			"message" : "email and username retrieved successfully",
+			"name" : c.PostForm("username"),
+			"email" : c.PostForm("email"),
 		}
 		c.JSON(http.StatusOK , res)
 	})
