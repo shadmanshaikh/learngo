@@ -39,7 +39,8 @@ func main(){
 		c.JSON(http.StatusOK , res)
 	})
 
-	r.GET("/enter-details" , func(c *gin.Context){
+	//contact us page
+	r.GET("/contact-us" , func(c *gin.Context){
 		c.HTML(http.StatusOK , "form.html" , nil)
 	})
 
@@ -50,6 +51,16 @@ func main(){
 			"email" : c.PostForm("email"),
 		}
 		c.JSON(http.StatusOK , res)
+	})
+
+	//homepage for real estate 
+	r.GET("/" , func(c *gin.Context){
+		c.HTML(http.StatusOK , "home.html" , nil)
+	})
+
+	//properties page
+	r.GET("/properties" , func(c *gin.Context){
+		c.HTML(http.StatusOK , "properties.html" , nil)
 	})
 
 	r.Run()
