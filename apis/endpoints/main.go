@@ -46,7 +46,7 @@ func main(){
 
 	r.POST("/submit" , func(c *gin.Context){
 		res := gin.H{
-			"message" : "email and username retrieved successfully",
+			"message" : c.PostForm("message"),
 			"name" : c.PostForm("username"),
 			"email" : c.PostForm("email"),
 		}
