@@ -14,6 +14,7 @@ type metaData struct {
 
 
 func main(){
+	//gin router
 	r := gin.Default()
 
 	//rendering html files
@@ -33,11 +34,13 @@ func main(){
 		},
 	
 	} 
+
+	// routing using v1
 	r.GET("api/v1/home" , func(c *gin.Context){
 		c.JSON(http.StatusOK , homeData)
 	})
 
-	//reading params in go
+	//reading path params in go
 	r.GET("api/v1/user/:id" , func(c *gin.Context){
 		userID := c.Param("id")
 		res := gin.H{
@@ -77,6 +80,7 @@ func main(){
 		c.HTML(http.StatusOK , "properties.html" , data)
 	})
 
+
 	r.POST("/getprops" , func(c *gin.Context){
 		res := gin.H{
 			"you search keyword" : c.PostForm("search"),
@@ -84,5 +88,19 @@ func main(){
 		c.JSON( http.StatusOK,res)
 	})
 
+	// use of query params in go
+	r.GET("/info" , func(c *gin.Context) {
+		name := c.DefaultQuery("name" , "guest")
+		age := c.Query("age")
+		res := gin.H{
+			"message" : "Hello there",
+			"name" : name,
+			"age" : age,
+		} 
+		c.JSON(http.StatusOK , res)
+	}) 
+
+
+	
 	r.Run()
 }
