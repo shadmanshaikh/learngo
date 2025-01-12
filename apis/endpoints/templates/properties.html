@@ -72,10 +72,12 @@
     </div>
     <div class="container">
         <h1>Search Properties</h1>
-        <div class="search-bar">
-            <input type="text" placeholder="Enter location, property type, or price range..." />
-            <button type="submit">Search</button>
-        </div>
+        <form action="/getprops" method="POST">
+            <div class="search-bar">
+                <input type="text" name="search" placeholder="Enter location, property type, or price range..." />
+                <button type="submit">Search</button>
+            </div>
+        </form>
         <p>Use the search bar above to find your perfect property.</p>
     </div>
 </body>

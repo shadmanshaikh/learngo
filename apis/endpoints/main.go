@@ -63,5 +63,13 @@ func main(){
 		c.HTML(http.StatusOK , "properties.html" , nil)
 	})
 
+	r.POST("/getprops" , func(c *gin.Context) {
+		searchBar := c.PostForm("search")
+		res := gin.H{
+			"you searched" : searchBar,
+		}
+		c.JSON(http.StatusOK , res )
+	})
+
 	r.Run()
 }
