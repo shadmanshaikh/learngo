@@ -2,9 +2,16 @@ package main
 
 import (
 	"net/http"
-
 	"github.com/gin-gonic/gin"
+	_ "github.com/go-sql-driver/mysql"
 )
+
+type metaData struct {
+	Title string
+	Header string
+	Search string
+}
+
 
 func main(){
 	r := gin.Default()
@@ -55,20 +62,26 @@ func main(){
 
 	//homepage for real estate 
 	r.GET("/" , func(c *gin.Context){
-		c.HTML(http.StatusOK , "home.html" , nil)
+		c.JSON(http.StatusOK , gin.H{
+			"Lets get started with : " : "GO!",
+		})
 	})
 
 	//properties page
 	r.GET("/properties" , func(c *gin.Context){
-		c.HTML(http.StatusOK , "properties.html" , nil)
+		data := metaData{
+			Title:  "Real Estate Club",
+			Header: "The Real Estate",
+			Search: "Something constant",
+		}
+		c.HTML(http.StatusOK , "properties.html" , data)
 	})
 
-	r.POST("/getprops" , func(c *gin.Context) {
-		searchBar := c.PostForm("search")
+	r.POST("/getprops" , func(c *gin.Context){
 		res := gin.H{
-			"you searched" : searchBar,
+			"you search keyword" : c.PostForm("search"),
 		}
-		c.JSON(http.StatusOK , res )
+		c.JSON( http.StatusOK,res)
 	})
 
 	r.Run()
