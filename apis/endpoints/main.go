@@ -3,7 +3,6 @@ package main
 import (
 	"net/http"
 	"github.com/gin-gonic/gin"
-	_ "github.com/go-sql-driver/mysql"
 )
 
 type metaData struct {
@@ -100,7 +99,40 @@ func main(){
 		c.JSON(http.StatusOK , res)
 	}) 
 
+	// updating JSON using PUT
+	// type areaDubai struct{
+	// 	name string
+	// 	size string
+	// 	pop int
+	// } 
+	var data = map[string]string{
+		"item1": "old value",
+		"name" : "chadmax",
+	}
+	r.PUT("/update/:key", func(c *gin.Context) {
+		key := c.Param("key") // Get the key from the URL
 
-	
+		// Bind the JSON body to a map
+		var body map[string]string
+		if err := c.ShouldBindJSON(&body); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid JSON"})
+			return
+		}
+
+		// Check if the key exists
+		if _, exists := data[key]; !exists {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Key not found"})
+			return
+		}
+
+		// Update the value
+		data[key] = body["value"]
+
+		c.JSON(http.StatusOK, gin.H{
+			"message": "Value updated",
+			"data":    data,
+		})
+	})
+
 	r.Run()
 }
