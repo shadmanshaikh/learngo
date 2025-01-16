@@ -33,9 +33,7 @@ func main(){
 	println("The largest element is :")
 	println(largestEle)
 
-	//binary search in go lang
 
-	
 
 	// append(sortedArr, [])
 }
