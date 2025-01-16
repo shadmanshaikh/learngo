@@ -2,9 +2,12 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 func main(){
+
+	start := time.Now()
 
 	// ways of using int arrays 
 	 x  := [3]int{1,2,3}
@@ -48,7 +51,8 @@ func main(){
 		fmt.Println(ele) 
 	}
 
-	
+	end := time.Since(start)
+	fmt.Print("Time Took to execute " , end)
 	
 
 }
