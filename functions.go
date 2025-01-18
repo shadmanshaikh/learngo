@@ -23,6 +23,8 @@ func smallEle(arr []int) int {
     return smallestEle
 }
 
+//
+
 func main() {
 	// taking input from user
 	var a , b int
